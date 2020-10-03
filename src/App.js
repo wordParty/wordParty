@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
+import ToggleDisplay from 'react-toggle-display';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faTimes} from '@fortawesome/free-solid-svg-icons';
 
-export class App extends Component {
+//FONT AWESOME ICONS
+const trashCan = <FontAwesomeIcon icon={faTrash} />;
+const exit = <FontAwesomeIcon icon={faTimes} />;
+
+class App extends Component {
   constructor() {
     super();
     this.state = {
@@ -91,3 +98,4 @@ export class App extends Component {
 }
 
 export default App;
+=======
