@@ -18,12 +18,33 @@ class App extends Component {
 			rhymeInput: '',
 			synInput: '',
 			words: [],
-			// listTitle: {
-			//   word: '',
-			// }
-			word: '',
+      savedWords: '',
+      poemLibrary: [],
 		};
-	}
+  }
+  
+  componentDidMount(){
+    const dbRef = firebase.database().ref();
+  
+      dbRef.on('value', (response) => {
+				const newState = [];
+				const data = response.val();
+
+				for (const key in data) {
+					newState.push({
+						key: key,
+						listofWords: data[key],
+          });
+          
+          console.log(data[key]);
+				}
+    
+			this.setState({
+					poemLibrary: newState,
+				});
+			});
+     
+  }
 
 	getRhy = () => {
 		axios({
@@ -33,7 +54,6 @@ class App extends Component {
 				rel_rhy: this.state.rhymeInput,
 			},
 		}).then((response) => {
-			// console.log(response);
 			let wordsResults = response.data;
 			this.setState({
 				words: wordsResults,
@@ -49,7 +69,6 @@ class App extends Component {
 				ml: this.state.synInput,
 			},
 		}).then((response) => {
-			// console.log(response);
 			let wordsResults = response.data;
 			this.setState({
 				words: wordsResults,
@@ -91,33 +110,52 @@ class App extends Component {
     dbRef.push(event.target.value);
 
     this.setState({
-     word: event.target.value,
+     savedWords: event.target.value
     })
-  
-		console.log('yay');
-	};
+    
+  };
+
 
 	render() {
 		return (
 			<div className='App wrapper'>
 				<button onClick={() => this.handleSyn()}>Synonyms</button>
 				<button onClick={() => this.handleRhy()}>Rhymes</button>
-				<section>
-					<h2>{this.state.title} words</h2>
-					{this.state.words.map((singleWord) => {
-						return (
-							<div key={singleWord.score} className='wordContainer'>
-								<button value={singleWord.word} onClick={this.addToList}>
-									{singleWord.word}
-								</button>
-							</div>
-						);
-					})}
+				<section className='displayedWords'>
+					<h2>{this.state.title}</h2>
+          <ul>
+
+            {this.state.words.map((singleWord) => {
+              return (
+                <li key={singleWord.score} className='wordContainer'>
+                  <button value={singleWord.word} onClick={this.addToList}>
+                    {singleWord.word}
+                  </button>
+                </li>
+              )
+            })}
+
+          </ul>
 				</section>
 
-        <section className=''>
+        <section className='poemLists'>
+          <ul>
+            {this.state.poemLibrary.map ((poem) => {
+              console.log(poem);
+              return (
+								<li key={poem.key}>
+									<h2>{poem.key}</h2>
+
+								</li>
+							)
+
+            })}
+           
+          </ul>
 
         </section>
+
+      
 			</div>
 		);
 	}
