@@ -9,6 +9,7 @@ import { faTrash, faTimes} from '@fortawesome/free-solid-svg-icons';
 const trashCan = <FontAwesomeIcon icon={faTrash} />;
 const exit = <FontAwesomeIcon icon={faTimes} />;
 
+
 class App extends Component {
   constructor() {
     super();
@@ -17,9 +18,11 @@ class App extends Component {
       rhymeInput: "",
       synInput: "",
       words: [],
+      wordInput: ""
     };
   }
 
+  // Retrieves Rhyme Results off API based on User Input
   getRhy = () => {
     axios({
       url: "https://api.datamuse.com/words",
@@ -35,6 +38,7 @@ class App extends Component {
     });
   };
 
+    // Retrieves Synonymn Results off API based on User Input
   getSyn = () => {
     axios({
       url: "https://api.datamuse.com/words",
@@ -46,48 +50,68 @@ class App extends Component {
       let wordsResults = response.data;
       this.setState({
         words: wordsResults,
+
       });
     });
   };
 
+  // Logs user input and saves to state
+  handleChange = (event) => {
+    let wordInput = event.target.value;
+    this.setState({
+      wordInput
+    }
+    )
+  }
+
+  // onClick Handle to get list of rhyming words and to place rhyme words in state
   handleRhy = () => {
-    if (true) {
       this.setState(
         {
-          rhymeInput: "happy",
-          title: "Rhyme test"
+          rhymeInput: this.state.wordInput,
+          title: this.state.wordInput
         },
         () => {
-          this.getRhy();
+          if (this.state.wordInput === "") {
+            alert('This is empty!')
+          } else {this.getRhy()}
         }
       );
-    }
   };
 
-  handleSyn = () => {
-    if (true) {
+  // onClick Handle to get list of synonymns and to place these words in state
+  handleSyn = (event) => {
       this.setState(
         {
-          synInput: "test",
-          title: "Synonym test",
+          synInput: this.state.wordInput,
+          title: this.state.wordInput
         },
         () => {
-          this.getSyn();
+          if (this.state.wordInput === "") {
+            alert('This is empty!')
+          } else {this.getSyn()}
         }
       );
-    }
   };
 
   render() {
     return (
       <div className="App wrapper">
+        <label htmlFor="chosenWord">Enter A Word</label>
+
+        <input
+          type="text"
+          id="chosenWord"
+          onChange={this.handleChange}
+          value={this.state.wordInput} />
+        
         <button onClick={() => this.handleSyn()}>Synonyms</button>
         <button onClick={() => this.handleRhy()}>Rhymes</button>
         <h1>{this.state.title}</h1>
         {this.state.words.map((singleWord) => {
           return (
             <div key={singleWord.score} className="wordContainer">
-              <p onClick={alert('whoot!')}>{singleWord.word}</p>
+              <p>{singleWord.word}</p>
             </div>
           );
         })}
@@ -98,4 +122,3 @@ class App extends Component {
 }
 
 export default App;
-=======
