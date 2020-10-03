@@ -3,7 +3,7 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 
 // Initialize Firebase
-const config = {
+const firebaseConfig = {
 	apiKey: 'AIzaSyCS6fkr1nkfcWbuxowQcwS55dUFGm9qa8g',
 	authDomain: 'wordparty-92c9f.firebaseapp.com',
 	databaseURL: 'https://wordparty-92c9f.firebaseio.com',
@@ -12,7 +12,9 @@ const config = {
 	messagingSenderId: '410418051346',
 	appId: '1:410418051346:web:10cd4fb319baf427c8dbcb',
 };
-firebase.initializeApp(config);
+ // Initialize Firebase
+ firebase.initializeApp(firebaseConfig);
+
 
 // this exports the CONFIGURED version of firebase
 export default firebase;
