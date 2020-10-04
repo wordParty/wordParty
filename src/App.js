@@ -178,6 +178,7 @@ class App extends Component {
                 return (
                   
                   <li key={poem.key}>
+                    <button>{exit}</button>
                     <h3>{poem.key}</h3>
                     <p>{myObject[key]}</p>
                   </li>
