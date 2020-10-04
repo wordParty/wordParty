@@ -26,6 +26,7 @@ class App extends Component {
 		};
 
   }
+
   componentDidMount(){
     const dbRef = firebase.database().ref();
   
@@ -43,7 +44,7 @@ class App extends Component {
 				}
     
 			this.setState({
-					poemLibrary: newState,
+          poemLibrary: newState,
 				});
 			});
      
@@ -166,22 +167,28 @@ class App extends Component {
           </ul>
 				</section>
 
-        {/* <section className='poemLists'>
+        <section className='poemLists'>
           <ul>
             {this.state.poemLibrary.map ((poem) => {
-              console.log(poem);
-              return (
-								<li key={poem.key}>
-									<h3>{poem.key}</h3>
+              console.log(poem.listofWords);
+              const myObject = poem.listofWords;
 
-								</li>
-							)
-
+              for (let key in myObject) {
+							
+                return (
+                  
+                  <li key={poem.key}>
+                    <h3>{poem.key}</h3>
+                    <p>{myObject[key]}</p>
+                  </li>
+                )
+             
+							}
             })}
            
           </ul>
 
-        </section> */}
+        </section>
 
       
 			</div>
