@@ -25,8 +25,7 @@ class App extends Component {
       poemLibrary: [],
 		};
 
-
-  
+  }
   componentDidMount(){
     const dbRef = firebase.database().ref();
   
@@ -137,15 +136,19 @@ class App extends Component {
 	render() {
 		return (
 			<div className='App wrapper'>
-          <label htmlFor="chosenWord">Enter A Word</label>
 
+      
+        <label htmlFor="chosenWord">Enter A Word</label>
         <input
-          type="text"
-          id="chosenWord"
-          onChange={this.handleChange}
-          value={this.state.wordInput} />
-				<button onClick={() => this.handleSyn()}>Synonyms</button>
-				<button onClick={() => this.handleRhy()}>Rhymes</button>
+        type="text"
+        id="chosenWord"
+        onChange={this.handleChange}
+        value={this.state.wordInput}
+        placeholder='Ex: Happy' />
+        <button onClick={() => this.handleSyn()}>Synonyms</button>
+        <button onClick={() => this.handleRhy()}>Rhymes</button>
+       
+
 				<section className='displayedWords'>
 					<h2>{this.state.title}</h2>
           <ul>
@@ -163,13 +166,13 @@ class App extends Component {
           </ul>
 				</section>
 
-        <section className='poemLists'>
+        {/* <section className='poemLists'>
           <ul>
             {this.state.poemLibrary.map ((poem) => {
               console.log(poem);
               return (
 								<li key={poem.key}>
-									<h2>{poem.key}</h2>
+									<h3>{poem.key}</h3>
 
 								</li>
 							)
@@ -178,7 +181,7 @@ class App extends Component {
            
           </ul>
 
-        </section>
+        </section> */}
 
       
 			</div>
