@@ -88,7 +88,7 @@ label {
 }
 
 h1 {
-  font-size: clamp(8rem, 10vw 12rem);
+  font-size: clamp(6rem, 7vw, 8rem);
 }
 
 h2 {
@@ -101,7 +101,7 @@ h3 {
 
 p, 
 a,
-input, 
+input,
 button {
   font-family: 'Lato', sans-serif;
   letter-spacing: 1px;
@@ -115,6 +115,7 @@ button {
 }
 
 button {
+  color: #353131;
   background-color: #CCCC97;
 
   font-size: 2rem;
@@ -124,9 +125,91 @@ button {
 }
 
 input {
+  color: #353131;
   background-color: #F9F6F4;
   font-size: clamp(1.6rem, 2vw, 2.2rem);
-  margin: 10px;
-
 }
 
+.wrapper {
+  width: 80%;
+  max-width: 1280;
+  margin: auto;
+}
+
+/* HEADER STYLES ------------------------------------------------- */
+
+header {
+  background-color: #F0B377;
+
+  text-align: center;
+
+  height: 40vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* FORM STYLES ------------------------------------- */
+
+main {
+  padding: 60px 0;
+}
+
+.form {
+  background-color: #E76155;
+  box-shadow: 7px 7px 14px -3px #353131;
+
+  border-radius: 10px;
+  padding: 40px 30px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.form h2,
+label {
+  font-size: clamp(2rem, 3vw, 3.2rem);
+}
+
+input {
+  border-radius: 5px;
+  padding: 20px 10px;
+  margin: 10px 0;
+}
+
+.form h2 {
+  padding: 50px 0 5px;
+}
+
+.form button {
+  box-shadow: 5px 5px 10px -3px #353131;
+  letter-spacing: 2px;
+
+  border-radius: 10px;
+  width: 40%;
+  padding: 20px;
+}
+
+.form button:hover,
+.form button:focus {
+  background-color: #F0B377;
+
+  letter-spacing: 3px;
+
+  transition: all .4s;
+}
+
+.form h2, 
+.form button,
+.buttonFlex {
+  text-transform: uppercase;
+}
+
+.buttonFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
