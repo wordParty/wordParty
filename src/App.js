@@ -69,7 +69,7 @@ class App extends Component {
     axios({
       url: "https://api.datamuse.com/words",
       params: {
-        max: 10,
+        max: 12,
         rel_rhy: this.state.rhymeInput,
       },
     }).then((response) => {
