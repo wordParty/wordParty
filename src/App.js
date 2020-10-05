@@ -6,6 +6,9 @@ import ToggleDisplay from 'react-toggle-display';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faTimes} from '@fortawesome/free-solid-svg-icons';
 
+//IMPORTING COMPONENTS
+import Header from './Header';
+
 //FONT AWESOME ICONS
 const trashCan = <FontAwesomeIcon icon={faTrash} />;
 const exit = <FontAwesomeIcon icon={faTimes} />;
@@ -136,62 +139,61 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className='App wrapper'>
+			<div className='App'>
+				<Header />
 
-      
-        <label htmlFor="chosenWord">Enter A Word</label>
-        <input
-        type="text"
-        id="chosenWord"
-        onChange={this.handleChange}
-        value={this.state.wordInput}
-        placeholder='Ex: Happy' />
-        <button onClick={() => this.handleSyn()}>Synonyms</button>
-        <button onClick={() => this.handleRhy()}>Rhymes</button>
-       
+				<main className='wrapper'>
+					<section className='form'>
+						<label htmlFor='chosenWord'>Enter A Word</label>
+						<input
+							type='text'
+							id='chosenWord'
+							onChange={this.handleChange}
+							value={this.state.wordInput}
+							placeholder='Ex: Happy'
+						/>
+            <h2>What kind of words would you like?</h2>
+						<div class="buttonFlex">
+              <button onClick={() => this.handleSyn()}>Synonyms</button>
+              <p>or</p>
+              <button onClick={() => this.handleRhy()}>Rhymes</button>
+            </div>
+					</section>
 
-				<section className='displayedWords'>
-					<h2>{this.state.title}</h2>
-          <ul>
+					<section className='displayedWords'>
+						<h2>{this.state.title}</h2>
+						<ul>
+							{this.state.words.map((singleWord) => {
+								return (
+									<li key={singleWord.score} className='wordContainer'>
+										<button value={singleWord.word} onClick={this.addToList}>
+											{singleWord.word}
+										</button>
+									</li>
+								);
+							})}
+						</ul>
+					</section>
 
-            {this.state.words.map((singleWord) => {
-              return (
-                <li key={singleWord.score} className='wordContainer'>
-                  <button value={singleWord.word} onClick={this.addToList}>
-                    {singleWord.word}
-                  </button>
-                </li>
-              )
-            })}
+					<section className='poemLists'>
+						<ul>
+							{this.state.poemLibrary.map((poem) => {
+								console.log(poem.listofWords);
+								const myObject = poem.listofWords;
 
-          </ul>
-				</section>
-
-        <section className='poemLists'>
-          <ul>
-            {this.state.poemLibrary.map ((poem) => {
-              console.log(poem.listofWords);
-              const myObject = poem.listofWords;
-
-              for (let key in myObject) {
-							
-                return (
-                  
-                  <li key={poem.key}>
-                    <button>{exit}</button>
-                    <h3>{poem.key}</h3>
-                    <p>{myObject[key]}</p>
-                  </li>
-                )
-             
-							}
-            })}
-           
-          </ul>
-
-        </section>
-
-      
+								for (let key in myObject) {
+									return (
+										<li key={poem.key}>
+											<button>{exit}</button>
+											<h3>{poem.key}</h3>
+											<p>{myObject[key]}</p>
+										</li>
+									);
+								}
+							})}
+						</ul>
+					</section>
+				</main>
 			</div>
 		);
 	}
