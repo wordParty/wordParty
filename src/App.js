@@ -7,8 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 //IMPORTING COMPONENTS
-import Header from './Header';
-import List from './List'
+import Header from './Header.js';
+import List from './List.js'
+import Footer from './Footer.js';
 
 //FONT AWESOME ICONS
 const trashCan = <FontAwesomeIcon icon={faTrash} />;
@@ -67,7 +68,7 @@ class App extends Component {
     axios({
       url: "https://api.datamuse.com/words",
       params: {
-        max: 10,
+        max: 12,
         rel_rhy: this.state.rhymeInput,
       },
     }).then((response) => {
@@ -190,6 +191,7 @@ class App extends Component {
 
                 const myObject = poem.listofWords;
 
+
                 const wordList = myObject.map((word) => {
                   return <p>{word}</p>;
                 });
@@ -202,6 +204,7 @@ class App extends Component {
       </div>
     );
   }
+
 }
 
 export default App;
