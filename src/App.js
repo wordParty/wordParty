@@ -37,13 +37,25 @@ class App extends Component {
 				const newState = [];
 				const data = response.val();
 
-				for (const key in data) {
+				for (let key in data) {
+
+          const wordObject = data[key];
+          const wordArray = [];
+          for(let title in wordObject){
+            console.log(wordObject[title]);
+
+            
+						wordArray.push(wordObject[title]);
+          } 
+
+
+
 					newState.push({
 						key: key,
-						listofWords: data[key],
-          });
+						listofWords: wordArray,
+					});
           
-          console.log(data[key]);
+          // console.log(data[key]);
 				}
     
 			this.setState({
@@ -178,19 +190,22 @@ class App extends Component {
 					<section className='poemLists'>
 						<ul>
 							{this.state.poemLibrary.map((poem) => {
-								console.log(poem.listofWords);
-								const myObject = poem.listofWords;
+                // console.log(poem.listofWords);
+                
+                const myObject = poem.listofWords;
+                
+                  const wordList = myObject.map((word) => {
+                    return <p>{word}</p>
+                  })
 
-								for (let key in myObject) {
-									return (
-										<li key={poem.key}>
-											<button>{exit}</button>
-											<h3>{poem.key}</h3>
-											<p>{myObject[key]}</p>
-										</li>
-									);
-								}
-							})}
+                  return (
+                  <li key={poem.key}>
+                    <button>{exit}</button>
+                    <h3>{poem.key}</h3>
+                    {wordList}
+                  </li>
+                )}
+							)}
 						</ul>
 					</section>
 				</main>
