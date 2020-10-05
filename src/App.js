@@ -12,6 +12,7 @@ import List from './List'
 
 //FONT AWESOME ICONS
 const trashCan = <FontAwesomeIcon icon={faTrash} />;
+const exit = <FontAwesomeIcon icon={faTimes} />;
 
 class App extends Component {
 
@@ -25,44 +26,40 @@ class App extends Component {
       wordInput: "",
       savedWords: '',
       poemLibrary: [],
-		};
+      showModal: false,
+		}
 
   }
 
   componentDidMount(){
     const dbRef = firebase.database().ref();
   
-      dbRef.on('value', (response) => {
-				const newState = [];
-				const data = response.val();
+    dbRef.on('value', (response) => {
+      const newState = [];
+      const data = response.val();
 
-				for (let key in data) {
+      for (let key in data) {
 
-          const wordObject = data[key];
-          const wordArray = [];
-          for(let title in wordObject){
-            console.log(wordObject[title]);
+        const wordObject = data[key];
+        const wordArray = [];
 
-            
-						wordArray.push(wordObject[title]);
-          } 
+        for(let title in wordObject){
+          wordArray.push(wordObject[title]);
+        } 
 
-
-
-					newState.push({
-						key: key,
-						listofWords: wordArray,
-					});
-          
-          // console.log(data[key]);
-				}
-    
-			this.setState({
-          poemLibrary: newState,
-				});
-			});
+        newState.push({
+          key: key,
+          listOfWords: wordArray,
+        });
+      }
+  
+      this.setState({
+        poemLibrary: newState,
+      });
+      
+    });
      
-  }
+  };
 
 // Retrieves Rhyme Results off API based on User Input
   getRhy = () => {
@@ -102,9 +99,8 @@ class App extends Component {
     let wordInput = event.target.value;
     this.setState({
       wordInput
-    }
-    )
-  }
+    });
+  };
 
   // onClick Handle to get list of rhyming words and to place rhyme words in state
   handleRhy = () => {
@@ -122,7 +118,7 @@ class App extends Component {
   };
 
   // onClick Handle to get list of synonymns and to place these words in state
-  handleSyn = (event) => {
+  handleSyn = () => {
       this.setState(
         {
           synInput: this.state.wordInput,
@@ -136,17 +132,29 @@ class App extends Component {
       );
   };
 
+  checkWordList = (array) => {
+    (array.length > 0) === true ? this.displayModal() : this.addToList();
+  }
+
+
 	addToList = (event) => {
 
     const dbRef = firebase.database().ref(this.state.title);
     dbRef.push(event.target.value);
 
     this.setState({
-     savedWords: event.target.value
-    })
+			savedWords: event.target.value,
+		});
     
   };
 
+  displayModal = () => {
+
+    this.setState({
+			showModal: !this.state.showModal,
+		});
+
+  }
 
 	render() {
 		return (
@@ -154,6 +162,27 @@ class App extends Component {
 				<Header />
 
 				<main className='wrapper'>
+
+					<ToggleDisplay show={this.state.showModal}>
+						<div className='modal'>
+							<div className='modalContent'>
+								<h3>Oops!</h3>
+								<p>
+									Looks like this word has already been added to your list!
+								</p>
+								<button
+									className='closeModal'
+									onClick={this.displayModal}
+								>
+									<span className='srOnly'>
+										Close this pop-up modal by clicking here.
+									</span>
+									{exit}
+								</button>
+							</div>
+						</div>
+					</ToggleDisplay>
+
 					<section className='form'>
 						<label htmlFor='chosenWord'>Enter A Word</label>
 						<input
@@ -163,12 +192,12 @@ class App extends Component {
 							value={this.state.wordInput}
 							placeholder='Ex: Happy'
 						/>
-            <h2>What kind of words would you like?</h2>
-						<div class="buttonFlex">
-              <button onClick={() => this.handleSyn()}>Synonyms</button>
-              <p>or</p>
-              <button onClick={() => this.handleRhy()}>Rhymes</button>
-            </div>
+						<h2>What kind of words would you like?</h2>
+						<div className='buttonFlex'>
+							<button onClick={() => this.handleSyn()}>Synonyms</button>
+							<p>or</p>
+							<button onClick={() => this.handleRhy()}>Rhymes</button>
+						</div>
 					</section>
 
 					<section className='displayedWords'>
@@ -189,24 +218,22 @@ class App extends Component {
 					<section className='poemLists'>
 						<ul>
 							{this.state.poemLibrary.map((poem) => {
-                // console.log(poem.listofWords);
+								// console.log(poem.listofWords);
+                const myObject = poem.listOfWords;
                 
-                const myObject = poem.listofWords;
+                const alreadyAdded = myObject.filter((singleword) => {
+                  return (singleword === this.state.savedWords)
+                });
+                console.log(alreadyAdded)
+                //not quite working but close
+                //this.checkWordList(alreadyAdded);
+                  
+								const wordList = myObject.map((word) => {
+                  return <p>{word}</p>;
+                });
                 
-                  const wordList = myObject.map((word) => {
-                    return <p>{word}</p>
-                  })
-
-                  return (
-
-                  <List
-                    key={poem.key}
-                    title={poem.key}
-                    list={wordList}
-                  />
-
-                )}
-							)}
+								return <List key={poem.key} title={poem.key} list={wordList} />;
+							})}
 						</ul>
 					</section>
 				</main>

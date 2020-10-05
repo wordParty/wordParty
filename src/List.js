@@ -11,7 +11,9 @@ class List extends React.Component {
             <li key={this.props.title}>
                 <button>{exit}</button>
                 <h3>{this.props.title}</h3>
+            
                 {this.props.list}
+                
             </li>
         )
     }
