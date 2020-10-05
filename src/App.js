@@ -8,11 +8,10 @@ import { faTrash, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 //IMPORTING COMPONENTS
 import Header from './Header';
+import List from './List'
 
 //FONT AWESOME ICONS
 const trashCan = <FontAwesomeIcon icon={faTrash} />;
-const exit = <FontAwesomeIcon icon={faTimes} />;
-
 
 class App extends Component {
 
@@ -199,11 +198,13 @@ class App extends Component {
                   })
 
                   return (
-                  <li key={poem.key}>
-                    <button>{exit}</button>
-                    <h3>{poem.key}</h3>
-                    {wordList}
-                  </li>
+
+                  <List
+                    key={poem.key}
+                    title={poem.key}
+                    list={wordList}
+                  />
+
                 )}
 							)}
 						</ul>
