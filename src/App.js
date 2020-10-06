@@ -16,159 +16,157 @@ const trashCan = <FontAwesomeIcon icon={faTrash} />;
 const exit = <FontAwesomeIcon icon={faTimes} />;
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      title: "",
-      rhymeInput: "",
-      synInput: "",
-      words: [],
-      wordInput: "",
-      savedWords: "",
-      poemLibrary: [],
+	constructor() {
+		super();
+		this.state = {
+			title: '',
+			rhymeInput: '',
+			synInput: '',
+			words: [],
+			wordInput: '',
+			savedWords: '',
+			poemLibrary: [],
 
-      showModal: false,
-      };
-    };
+			showModal: false,
+		};
+	}
 
+	componentDidMount() {
+		const dbRef = firebase.database().ref();
 
- componentDidMount(){
-    const dbRef = firebase.database().ref();
-    dbRef.on('value', (response) => {
-      const newState = [];
-      const data = response.val();
-      for (let key in data) {
-        const wordObject = data[key];
-        const wordArray = [];
-        for(let title in wordObject){
-          wordArray.push(wordObject[title]);
-        } 
-        newState.push({
-          key: key,
-          listOfWords: wordArray,
-        });
-      }
-      this.setState({
-        poemLibrary: newState,
-      });
-    });
-  };
+		dbRef.on('value', (response) => {
+			const newState = [];
+			const data = response.val();
 
-  handleRemove = (listKey) => {
-    const dbRef = firebase.database().ref();
-    dbRef.child(listKey).remove();
-  };
+			for (let key in data) {
+				const wordObject = data[key];
+				const wordArray = [];
 
-  // Retrieves Rhyme Results off API based on User Input
-  getRhy = () => {
-    axios({
-      url: "https://api.datamuse.com/words",
-      params: {
-        max: 12,
-        rel_rhy: this.state.rhymeInput,
-      },
-    }).then((response) => {
-      let wordsResults = response.data;
-      this.setState({
-        words: wordsResults,
-      });
-    });
-  };
+				for (let title in wordObject) {
+					wordArray.push(wordObject[title]);
+				}
 
-  // Retrieves Synonymn Results off API based on User Input
-  getSyn = () => {
-    axios({
-      url: "https://api.datamuse.com/words",
-      params: {
-        max: 10,
-        ml: this.state.synInput,
-      },
-    }).then((response) => {
-      let wordsResults = response.data;
-      this.setState({
-        words: wordsResults,
-      });
-    });
-  };
+				newState.push({
+					key: key,
+					listOfWords: wordArray,
+				});
+			}
 
-  // Logs user input and saves to state
-  handleChange = (event) => {
-    let wordInput = event.target.value;
-    this.setState({
-
-      wordInput,
-    });
-  };
-
-  // onClick Handle to get list of rhyming words and to place rhyme words in state
-  handleRhy = () => {
-    this.setState(
-      {
-        rhymeInput: this.state.wordInput,
-        title: this.state.wordInput,
-      },
-      () => {
-        if (this.state.wordInput === "") {
-          alert("This is empty!");
-        } else {
-          this.getRhy();
-        }
-      }
-    );
-  };
-
-  // onClick Handle to get list of synonymns and to place these words in state
-
-  handleSyn = () => {
-      this.setState(
-        {
-          synInput: this.state.wordInput,
-          title: this.state.wordInput
-        },
-        () => {
-          if (this.state.wordInput === "") {
-            alert('This is empty!')
-          } else {this.getSyn()}
-
-        }
-      
-    );
-  };
-
-
-//   toggleModal = (wordValue) => {
-
-//     // const checkWords = this.state.poemLibrary.filter((word) => {
-//     //   return word
-//     // })
-
-//     console.log(wordValue);
-
-//     wordValue === this.state.poemLibrary.key
-//     ? this.displayModal()
-//     : this.addToList(wordValue)
-    
-//   }
-
-	addToList = (wordToAdd) => {
-
-    const dbRef = firebase.database().ref(this.state.title);
-    dbRef.push(wordToAdd);
-
-    this.setState({
-
-			savedWords: wordToAdd,
+			this.setState({
+				poemLibrary: newState,
+			});
 		});
+	}
+
+	handleRemove = (listKey) => {
+		const dbRef = firebase.database().ref();
+		dbRef.child(listKey).remove();
+	};
+
+	// Retrieves Rhyme Results off API based on User Input
+	getRhy = () => {
+		axios({
+			url: 'https://api.datamuse.com/words',
+			params: {
+				max: 12,
+				rel_rhy: this.state.rhymeInput,
+			},
+		}).then((response) => {
+			let wordsResults = response.data;
+			this.setState({
+				words: wordsResults,
+			});
+		});
+	};
+
+	// Retrieves Synonymn Results off API based on User Input
+	getSyn = () => {
+		axios({
+			url: 'https://api.datamuse.com/words',
+			params: {
+				max: 10,
+				ml: this.state.synInput,
+			},
+		}).then((response) => {
+			let wordsResults = response.data;
+			this.setState({
+				words: wordsResults,
+			});
+		});
+	};
+
+	// Logs user input and saves to state
+	handleChange = (event) => {
+		let wordInput = event.target.value;
+		this.setState({
+			wordInput,
+		});
+	};
+
+	// onClick Handle to get list of rhyming words and to place rhyme words in state
+	handleRhy = () => {
+		this.setState(
+			{
+				rhymeInput: this.state.wordInput,
+				title: this.state.wordInput,
+			},
+			() => {
+				if (this.state.wordInput === '') {
+					alert('This is empty!');
+				} else {
+					this.getRhy();
+				}
+			}
+		);
+	};
+
+	// onClick Handle to get list of synonymns and to place these words in state
+
+	handleSyn = () => {
+		this.setState(
+			{
+				synInput: this.state.wordInput,
+				title: this.state.wordInput,
+			},
+			() => {
+				if (this.state.wordInput === '') {
+					alert('This is empty!');
+				} else {
+					this.getSyn();
+				}
+			}
+		);
+	};
+
+	toggleModal = (event) => {
+
+    if (this.state.poemLibrary.length > 0){
+      
+		const checkWords = this.state.poemLibrary[0].listOfWords.includes(event.target.value)
+    console.log(checkWords);
     
-  };
+    checkWords ? this.displayModal() : this.addToList(event.target.value);
+    } else {
+      this.addToList(event.target.value);
+    }
 
-  displayModal = () => {
 
-    this.setState({
+	};
+
+	addToList = (value) => {
+		const dbRef = firebase.database().ref(this.state.title);
+		dbRef.push(value);
+
+		this.setState({
+			savedWords: value,
+		});
+	};
+
+	displayModal = () => {
+		this.setState({
 			showModal: !this.state.showModal,
 		});
-
-  }
+	};
 
 	render() {
 		return (
@@ -176,18 +174,12 @@ class App extends Component {
 				<Header />
 
 				<main className='wrapper'>
-
 					<ToggleDisplay show={this.state.showModal}>
 						<div className='modal'>
 							<div className='modalContent'>
 								<h3>Oops!</h3>
-								<p>
-									Looks like this word has already been added to your list!
-								</p>
-								<button
-									className='closeModal'
-									onClick={this.displayModal}
-								>
+								<p>Looks like this word has already been added to your list!</p>
+								<button className='closeModal' onClick={this.displayModal}>
 									<span className='srOnly'>
 										Close this pop-up modal by clicking here.
 									</span>
@@ -220,7 +212,12 @@ class App extends Component {
 							{this.state.words.map((singleWord) => {
 								return (
 									<li key={singleWord.score} className='wordContainer'>
-										<button value={singleWord.word} onClick={() => {this.addToList(singleWord.word)}}>
+										<button
+											value={singleWord.word}
+											onClick={
+												this.toggleModal
+											}
+										>
 											{singleWord.word}
 										</button>
 									</li>
@@ -232,51 +229,50 @@ class App extends Component {
 					<section className='poemLists'>
 						<ul>
 							{this.state.poemLibrary.map((poem) => {
-								console.log(poem.listofWords);
-                const myObject = poem.listOfWords;
-                
-                // const alreadyAdded = myObject.filter((singleword) => {
-                //   return (singleword === this.state.savedWords)
-                // });
+								const myObject = poem.listOfWords;
 
-                // const callModal = alreadyAdded.length > 0;
-                // console.log(callModal)
-                // //not quite working but close
-                //this.checkWordList(alreadyAdded);
-                  
+								// const alreadyAdded = myObject.filter((singleword) => {
+								// 	return singleword === this.state.savedWords;
+								// });
+
+								// // const callModal = .length > 1;
+								// // console.log(alreadyAdded);
+
+								// // alreadyAdded.length > 1
+
 								const wordList = myObject.map((word, index) => {
-                  return (
-                    <div className='words' key={index}>
-                      <p>{word}</p>
+									return (
+										<div className='words' key={index}>
+											<p>{word}</p>
 
-                      <span className='srOnly'>
-                        Delete this word by clicking here.
-									    </span>
-                      <button title='remove'>{trashCan}</button>
-                    </div>
-                  )
-                });
-                
+											<span className='srOnly'>
+												Delete this word by clicking here.
+											</span>
+											<button title='remove'>{trashCan}</button>
+										</div>
+									);
+								});
+
 								return (
-                  <List
-                    key={poem.key}
-                    title={poem.key}
-                    list={wordList}
-                    listKey={poem.key}
-                    removeHandle={this.handleRemove}
-                  />
-                );
+									<List
+										key={poem.key}
+										title={poem.key}
+										list={wordList}
+										listKey={poem.key}
+										removeHandle={this.handleRemove}
+									/>
+								);
 							})}
 						</ul>
 					</section>
 				</main>
 
-        <footer>
-          <Footer />
-      </footer>
-      </div>
-    );
-  }
+				<footer>
+					<Footer />
+				</footer>
+			</div>
+		);
+	}
 }
 
 export default App;
