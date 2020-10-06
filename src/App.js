@@ -28,44 +28,31 @@ class App extends Component {
       poemLibrary: [],
 
       showModal: false,
-		}
-
+      };
     };
 
-  }
 
-  componentDidMount() {
+ componentDidMount(){
     const dbRef = firebase.database().ref();
-
-
-    dbRef.on("value", (response) => {
+    dbRef.on('value', (response) => {
       const newState = [];
       const data = response.val();
-
       for (let key in data) {
-
-
         const wordObject = data[key];
         const wordArray = [];
-
         for(let title in wordObject){
           wordArray.push(wordObject[title]);
         } 
-
         newState.push({
           key: key,
           listOfWords: wordArray,
         });
       }
-  
       this.setState({
         poemLibrary: newState,
       });
-      
     });
-     
   };
-
 
   handleRemove = (listKey) => {
     const dbRef = firebase.database().ref();
@@ -144,7 +131,7 @@ class App extends Component {
           } else {this.getSyn()}
 
         }
-      }
+      
     );
   };
 
@@ -271,12 +258,12 @@ class App extends Component {
                 });
                 
 								return (
-                  <List 
-                  key={poem.key} 
-                  title={poem.key} 
-                  list={wordList}  
-                  listkey={poem.key}
-                  
+                  <List
+                    key={poem.key}
+                    title={poem.key}
+                    list={wordList}
+                    listKey={poem.key}
+                    removeHandle={this.handleRemove}
                   />
                 );
 							})}
