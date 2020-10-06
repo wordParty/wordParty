@@ -132,18 +132,26 @@ class App extends Component {
       );
   };
 
-  checkWordList = (array) => {
-    (array.length > 0) === true ? this.displayModal() : this.addToList();
+  toggleModal = (wordValue) => {
+
+    const checkWords = this.state.poemLibrary.filter((word) => {
+      return word === wordValue
+    })
+
+    console.log(checkWords);
+
+    (checkWords.length > 0) === false
+    ? this.addToList(wordValue)
+    : this.displayModal();
   }
 
-
-	addToList = (event) => {
+	addToList = (wordToAdd) => {
 
     const dbRef = firebase.database().ref(this.state.title);
-    dbRef.push(event.target.value);
+    dbRef.push(wordToAdd);
 
     this.setState({
-			savedWords: event.target.value,
+			savedWords: wordToAdd,
 		});
     
   };
@@ -206,7 +214,7 @@ class App extends Component {
 							{this.state.words.map((singleWord) => {
 								return (
 									<li key={singleWord.score} className='wordContainer'>
-										<button value={singleWord.word} onClick={this.addToList}>
+										<button value={singleWord.word} onClick={() => {this.toggleModal(singleWord.word)}}>
 											{singleWord.word}
 										</button>
 									</li>
@@ -221,18 +229,37 @@ class App extends Component {
 								// console.log(poem.listofWords);
                 const myObject = poem.listOfWords;
                 
-                const alreadyAdded = myObject.filter((singleword) => {
-                  return (singleword === this.state.savedWords)
-                });
-                console.log(alreadyAdded)
-                //not quite working but close
+                // const alreadyAdded = myObject.filter((singleword) => {
+                //   return (singleword === this.state.savedWords)
+                // });
+
+                // const callModal = alreadyAdded.length > 0;
+                // console.log(callModal)
+                // //not quite working but close
                 //this.checkWordList(alreadyAdded);
                   
-								const wordList = myObject.map((word) => {
-                  return <p>{word}</p>;
+								const wordList = myObject.map((word, index) => {
+                  return (
+                    <div className='words' key={index}>
+                      <p>{word}</p>
+
+                      <span className='srOnly'>
+                        Delete this word by clicking here.
+									    </span>
+                      <p title='remove'>{trashCan}</p>
+                    </div>
+                  )
                 });
                 
-								return <List key={poem.key} title={poem.key} list={wordList} />;
+								return (
+                  <List 
+                  key={poem.key} 
+                  title={poem.key} 
+                  list={wordList}  
+                  listkey={poem.key}
+                  
+                  />
+                );
 							})}
 						</ul>
 					</section>
