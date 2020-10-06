@@ -7,38 +7,43 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 //IMPORTING COMPONENTS
-import Header from './Header';
-import List from './List'
+import Header from './Header.js';
+import List from './List.js'
+import Footer from './Footer.js';
 
 //FONT AWESOME ICONS
 const trashCan = <FontAwesomeIcon icon={faTrash} />;
 const exit = <FontAwesomeIcon icon={faTimes} />;
 
 class App extends Component {
-
-	constructor() {
-		super();
-		this.state = {
-			title: '',
-			rhymeInput: '',
-			synInput: '',
-			words: [],
+  constructor() {
+    super();
+    this.state = {
+      title: "",
+      rhymeInput: "",
+      synInput: "",
+      words: [],
       wordInput: "",
-      savedWords: '',
+      savedWords: "",
       poemLibrary: [],
+
       showModal: false,
 		}
 
+    };
+
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const dbRef = firebase.database().ref();
-  
-    dbRef.on('value', (response) => {
+
+
+    dbRef.on("value", (response) => {
       const newState = [];
       const data = response.val();
 
       for (let key in data) {
+
 
         const wordObject = data[key];
         const wordArray = [];
@@ -61,12 +66,18 @@ class App extends Component {
      
   };
 
-// Retrieves Rhyme Results off API based on User Input
+
+  handleRemove = (listKey) => {
+    const dbRef = firebase.database().ref();
+    dbRef.child(listKey).remove();
+  };
+
+  // Retrieves Rhyme Results off API based on User Input
   getRhy = () => {
     axios({
       url: "https://api.datamuse.com/words",
       params: {
-        max: 10,
+        max: 12,
         rel_rhy: this.state.rhymeInput,
       },
     }).then((response) => {
@@ -77,7 +88,7 @@ class App extends Component {
     });
   };
 
-    // Retrieves Synonymn Results off API based on User Input
+  // Retrieves Synonymn Results off API based on User Input
   getSyn = () => {
     axios({
       url: "https://api.datamuse.com/words",
@@ -89,7 +100,6 @@ class App extends Component {
       let wordsResults = response.data;
       this.setState({
         words: wordsResults,
-
       });
     });
   };
@@ -98,26 +108,30 @@ class App extends Component {
   handleChange = (event) => {
     let wordInput = event.target.value;
     this.setState({
-      wordInput
+
+      wordInput,
     });
   };
 
   // onClick Handle to get list of rhyming words and to place rhyme words in state
   handleRhy = () => {
-      this.setState(
-        {
-          rhymeInput: this.state.wordInput,
-          title: this.state.wordInput
-        },
-        () => {
-          if (this.state.wordInput === "") {
-            alert('This is empty!')
-          } else {this.getRhy()}
+    this.setState(
+      {
+        rhymeInput: this.state.wordInput,
+        title: this.state.wordInput,
+      },
+      () => {
+        if (this.state.wordInput === "") {
+          alert("This is empty!");
+        } else {
+          this.getRhy();
         }
-      );
+      }
+    );
   };
 
   // onClick Handle to get list of synonymns and to place these words in state
+
   handleSyn = () => {
       this.setState(
         {
@@ -128,23 +142,26 @@ class App extends Component {
           if (this.state.wordInput === "") {
             alert('This is empty!')
           } else {this.getSyn()}
+
         }
-      );
+      }
+    );
   };
 
-  toggleModal = (wordValue) => {
 
-    // const checkWords = this.state.poemLibrary.filter((word) => {
-    //   return word
-    // })
+//   toggleModal = (wordValue) => {
 
-    console.log(wordValue);
+//     // const checkWords = this.state.poemLibrary.filter((word) => {
+//     //   return word
+//     // })
 
-    wordValue === this.state.poemLibrary.key
-    ? this.displayModal()
-    : this.addToList(wordValue)
+//     console.log(wordValue);
+
+//     wordValue === this.state.poemLibrary.key
+//     ? this.displayModal()
+//     : this.addToList(wordValue)
     
-  }
+//   }
 
 	addToList = (wordToAdd) => {
 
@@ -152,6 +169,7 @@ class App extends Component {
     dbRef.push(wordToAdd);
 
     this.setState({
+
 			savedWords: wordToAdd,
 		});
     
@@ -215,7 +233,7 @@ class App extends Component {
 							{this.state.words.map((singleWord) => {
 								return (
 									<li key={singleWord.score} className='wordContainer'>
-										<button value={singleWord.word} onClick={() => {this.toggleModal(singleWord.word)}}>
+										<button value={singleWord.word} onClick={() => {this.addToList(singleWord.word)}}>
 											{singleWord.word}
 										</button>
 									</li>
@@ -265,9 +283,13 @@ class App extends Component {
 						</ul>
 					</section>
 				</main>
-			</div>
-		);
-	}
+
+        <footer>
+          <Footer />
+      </footer>
+      </div>
+    );
+  }
 }
 
 export default App;
