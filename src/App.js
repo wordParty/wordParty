@@ -134,15 +134,16 @@ class App extends Component {
 
   toggleModal = (wordValue) => {
 
-    const checkWords = this.state.poemLibrary.filter((word) => {
-      return word === wordValue
-    })
+    // const checkWords = this.state.poemLibrary.filter((word) => {
+    //   return word
+    // })
 
-    console.log(checkWords);
+    console.log(wordValue);
 
-    (checkWords.length > 0) === false
-    ? this.addToList(wordValue)
-    : this.displayModal();
+    wordValue === this.state.poemLibrary.key
+    ? this.displayModal()
+    : this.addToList(wordValue)
+    
   }
 
 	addToList = (wordToAdd) => {
@@ -226,7 +227,7 @@ class App extends Component {
 					<section className='poemLists'>
 						<ul>
 							{this.state.poemLibrary.map((poem) => {
-								// console.log(poem.listofWords);
+								console.log(poem.listofWords);
                 const myObject = poem.listOfWords;
                 
                 // const alreadyAdded = myObject.filter((singleword) => {
@@ -246,7 +247,7 @@ class App extends Component {
                       <span className='srOnly'>
                         Delete this word by clicking here.
 									    </span>
-                      <p title='remove'>{trashCan}</p>
+                      <button title='remove'>{trashCan}</button>
                     </div>
                   )
                 });
