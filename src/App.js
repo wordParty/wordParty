@@ -201,6 +201,9 @@ class App extends Component {
             </ul>
           </section>
         </main>
+        <footer>
+          <Footer />
+      </footer>
       </div>
     );
   }
