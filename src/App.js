@@ -8,6 +8,7 @@ import {faTimes} from '@fortawesome/free-solid-svg-icons';
 
 //IMPORTING COMPONENTS
 import Header from './Header.js';
+import Modal from './Modal.js';
 import List from './List.js'
 import Footer from './Footer.js';
 
@@ -203,7 +204,7 @@ class App extends Component {
     });
   }
 
-  //Removing specific object inside poemLibrary array (i.e. removing saved list)
+  //Removing list from Firebase when button is clicked
   handleRemove = (listKey) => {
     const dbRef = firebase.database().ref();
     dbRef.child(listKey).remove();
@@ -211,83 +212,54 @@ class App extends Component {
 
   render() {
     return (
-      <div className='App'>
-        <Header />
+			<div className='App'>
+				<Header />
 
-        <main className='wrapper'>
-          {/* error handling modal if user tries to add same word to a list twice */}
-          <ToggleDisplay show={this.state.showModal}>
-            <div className='modal'>
-              <div className='modalContent'>
-                <h3>Oops!</h3>
-                <p>Looks like this word has already been added to your list!</p>
-                <button className='closeModal' onClick={this.displayModal}>
-                  <span className='srOnly'>
-                    Close this pop-up modal by clicking here.
-                  </span>
-                  {exit}
-                </button>
-              </div>
-            </div>
-          </ToggleDisplay>
+				<main className='wrapper'>
+					{/* error handling modal if input is blank when submitted */}
+					<ToggleDisplay show={this.state.showFormModal}>
+						<Modal
+							pTag='Please enter a word and try again!'
+							showTheModal={this.displayFormModal}
+						/>
+					</ToggleDisplay>
 
-          {/* error handling modal if user tries to add same word to a list twice */}
-          <ToggleDisplay show={this.state.noResultsModal}>
-            <div className='modal'>
-              <div className='modalContent'>
-                <h3>Oops!</h3>
-                <p>
-                  Looks like we can't find any results, please try another word!
-                </p>
-                <button
-                  className='closeModal'
-                  onClick={this.displayNoResultsModal}
-                >
-                  <span className='srOnly'>
-                    Close this pop-up modal by clicking here.
-                  </span>
-                  {exit}
-                </button>
-              </div>
-            </div>
-          </ToggleDisplay>
+					{/* error handling modal if API call returns no results */}
+					<ToggleDisplay show={this.state.noResultsModal}>
+						<Modal
+							pTag="Looks like we can't find any results, please try another word!"
+							showTheModal={this.displayNoResultsModal}
+						/>
+					</ToggleDisplay>
 
-          {/* error handling modal if input is blank when submitted */}
-          <ToggleDisplay show={this.state.showFormModal}>
-            <div className='modal'>
-              <div className='modalContent'>
-                <h3>Oops!</h3>
-                <p>Please enter a word and try again!</p>
-                <button className='closeModal' onClick={this.displayFormModal}>
-                  <span className='srOnly'>
-                    Close this pop-up modal by clicking here.
-                  </span>
-                  {exit}
-                </button>
-              </div>
-            </div>
-          </ToggleDisplay>
+					{/* error handling modal if user tries to add same word to a list twice */}
+					<ToggleDisplay show={this.state.showModal}>
+						<Modal
+							pTag='Looks like this word has already been added to your list!'
+							showTheModal={this.displayModal}
+						/>
+					</ToggleDisplay>
 
-          {/*section that takes in user input*/}
-          <section className='form'>
-            <label htmlFor='chosenWord'>Enter A Word</label>
-            <input
-              type='text'
-              id='chosenWord'
-              onChange={this.handleChange}
-              value={this.state.wordInput}
-              placeholder='Ex: Happy'
-            />
-            <h2>What kind of words would you like?</h2>
-            <div className='buttonFlex'>
-              <button onClick={() => this.handleSyn()}>Synonyms</button>
-              <p>or</p>
-              <button onClick={() => this.handleRhy()}>Rhymes</button>
-            </div>
-          </section>
+					{/*section that takes in user input*/}
+					<section className='form'>
+						<label htmlFor='chosenWord'>Enter A Word</label>
+						<input
+							type='text'
+							id='chosenWord'
+							onChange={this.handleChange}
+							value={this.state.wordInput}
+							placeholder='Ex: Happy'
+						/>
+						<h2>What kind of words would you like?</h2>
+						<div className='buttonFlex'>
+							<button onClick={() => this.handleSyn()}>Synonyms</button>
+							<p>or</p>
+							<button onClick={() => this.handleRhy()}>Rhymes</button>
+						</div>
+					</section>
 
-          {/*section where API call results are displayed*/}
-         <ToggleDisplay show={this.state.showDisplayedWords}>
+					{/*section where API call results are displayed*/}
+					<ToggleDisplay show={this.state.showDisplayedWords}>
 						<section className='displayedWords'>
 							<h2>{this.state.title}</h2>
 							<ul>
@@ -306,39 +278,38 @@ class App extends Component {
 							</ul>
 						</section>
 					</ToggleDisplay>
-          
-          {/* Display firebase data/saved lists */}
-          <section className='poemLists'>
-            <ul>
 
-              {/* Accessing poemLibrary array and mapping over it to access saved listOfWords array. Accessing listOfWords array and mapping over it to render individual words in array */}
-              {this.state.poemLibrary.map((poem) => {
-                const myObject = poem.listOfWords;
-                const wordList = myObject.map((word, index) => {
-                  return (
-                    <div className='words' key={index}>
-                      <p className='word'>{word}</p>
-                    </div>
-                  );
-                });
-                return (
-                  // List Component that holds our saved words
-                  <List
-                    key={poem.key}
-                    title={poem.key}
-                    list={wordList}
-                    listKey={poem.key}
-                    removeHandle={this.handleRemove}
-                  />
-                );
-              })}
-            </ul>
-          </section>
-        </main>
+					{/* Display firebase data/saved lists */}
+					<section className='poemLists'>
+						<ul>
+							{/* Accessing poemLibrary array and mapping over it to access saved listOfWords array. Accessing listOfWords array and mapping over it to render individual words in array */}
+							{this.state.poemLibrary.map((poem) => {
+								const myObject = poem.listOfWords;
+								const wordList = myObject.map((word, index) => {
+									return (
+										<div className='words' key={index}>
+											<p>{word}</p>
+										</div>
+									);
+								});
+								return (
+									// List Component that holds our words that are stored in Firebase
+									<List
+										key={poem.key}
+										title={poem.key}
+										list={wordList}
+										listKey={poem.key}
+										removeHandle={this.handleRemove}
+									/>
+								);
+							})}
+						</ul>
+					</section>
+				</main>
 
-        <Footer />
-      </div>
-    );
+				<Footer />
+			</div>
+		);
   }
 }
 

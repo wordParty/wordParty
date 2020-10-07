@@ -217,8 +217,7 @@ input {
   align-items: center;
 }
 
-
-/* MODAL STYLES ----------------------------------------------------------------- */
+/* MODAL STYLES ----------------------------------------------------- */
 
 .modal {
   background-color: #30303090;
@@ -235,10 +234,10 @@ input {
 .modalContent {
   background-color: #F9F6F4;
   border-radius: 10px;
-  padding: 20px; 
+  padding: 30px; 
   margin: auto; 
-  width: 50%;  
-  height: 30%;
+  width: 55%;  
+  height: 35%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -325,7 +324,6 @@ input {
   border-radius: 7px;
 }
  
-/* TODO make one class */
 .removeWord:hover,
 .removeWord:focus,
 .displayedWords button:hover,
@@ -398,15 +396,26 @@ footer a:focus {
 
 /* Portrait tablet and small desktop */
 @media(max-width: 940px){
+
+  .modalContent {
+    width: 70%;
+    height: 40%;
+  }
+
   .displayedWords li,
   .poemLists li {
     width: calc(90% / 2);
   }
-
 }
 
 /* Portrait tablet, landscape phones and down */
 @media(max-width: 700px){
+
+  .modalContent {
+    width: 80%;
+    height: 40%;
+  }
+
   .buttonFlex {
     flex-direction: column;
   }
