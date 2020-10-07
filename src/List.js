@@ -6,6 +6,7 @@ const exit = <FontAwesomeIcon icon={faTimes} />;
 
 
 class List extends React.Component {
+    // callRemove function is passing a prop that removes the list via removeHandle on App.js
 
     callRemove = () => {
         this.props.removeHandle(this.props.title)

@@ -398,8 +398,11 @@ footer a:focus {
 
 /* Portrait tablet and small desktop */
 @media(max-width: 940px){
+  .displayedWords button {
+    width: 50%;
+  }
 
-  .poemLists li {
+ .poemLists li {
     width: calc(90% /2);
   }
 
