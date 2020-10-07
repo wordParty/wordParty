@@ -26,7 +26,7 @@ class App extends Component {
 			wordInput: '',
 			savedWords: '',
 			poemLibrary: [],
-
+			showFormModal: false,
 			showModal: false,
 		};
 	}
@@ -112,7 +112,7 @@ class App extends Component {
 			},
 			() => {
 				if (this.state.wordInput === '') {
-					alert('This is empty!');
+					this.displayFormModal();
 				} else {
 					this.getRhy();
 				}
@@ -130,7 +130,7 @@ class App extends Component {
 			},
 			() => {
 				if (this.state.wordInput === '') {
-					alert('This is empty!');
+					this.displayFormModal();
 				} else {
 					this.getSyn();
 				}
@@ -138,19 +138,23 @@ class App extends Component {
 		);
 	};
 
+	displayFormModal = () => {
+		this.setState({
+			showFormModal: !this.state.showFormModal,
+		});
+	};
+
 	toggleModal = (event) => {
+		if (this.state.poemLibrary.length > 0) {
+			const checkWords = this.state.poemLibrary[0].listOfWords.includes(
+				event.target.value
+			);
+			console.log(checkWords);
 
-    if (this.state.poemLibrary.length > 0){
-      
-		const checkWords = this.state.poemLibrary[0].listOfWords.includes(event.target.value)
-    console.log(checkWords);
-    
-    checkWords ? this.displayModal() : this.addToList(event.target.value);
-    } else {
-      this.addToList(event.target.value);
-    }
-
-
+			checkWords ? this.displayModal() : this.addToList(event.target.value);
+		} else {
+			this.addToList(event.target.value);
+		}
 	};
 
 	addToList = (value) => {
@@ -173,13 +177,32 @@ class App extends Component {
 			<div className='App'>
 				<Header />
 
+
 				<main className='wrapper'>
+
+					{/* error handling modal if user tries to add same word to a list twice */}
 					<ToggleDisplay show={this.state.showModal}>
 						<div className='modal'>
 							<div className='modalContent'>
 								<h3>Oops!</h3>
 								<p>Looks like this word has already been added to your list!</p>
 								<button className='closeModal' onClick={this.displayModal}>
+									<span className='srOnly'>
+										Close this pop-up modal by clicking here.
+									</span>
+									{exit}
+								</button>
+							</div>
+						</div>
+					</ToggleDisplay>
+
+					{/* error handling modal if input is blank when submitted */}
+					<ToggleDisplay show={this.state.showFormModal}>
+						<div className='modal'>
+							<div className='modalContent'>
+								<h3>Oops!</h3>
+								<p>Please enter a word and try again!</p>
+								<button className='closeModal' onClick={this.displayFormModal}>
 									<span className='srOnly'>
 										Close this pop-up modal by clicking here.
 									</span>
@@ -212,12 +235,7 @@ class App extends Component {
 							{this.state.words.map((singleWord) => {
 								return (
 									<li key={singleWord.score} className='wordContainer'>
-										<button
-											value={singleWord.word}
-											onClick={
-												this.toggleModal
-											}
-										>
+										<button value={singleWord.word} onClick={this.toggleModal}>
 											{singleWord.word}
 										</button>
 									</li>
@@ -231,24 +249,18 @@ class App extends Component {
 							{this.state.poemLibrary.map((poem) => {
 								const myObject = poem.listOfWords;
 
-								// const alreadyAdded = myObject.filter((singleword) => {
-								// 	return singleword === this.state.savedWords;
-								// });
-
-								// // const callModal = .length > 1;
-								// // console.log(alreadyAdded);
-
-								// // alreadyAdded.length > 1
-
 								const wordList = myObject.map((word, index) => {
 									return (
 										<div className='words' key={index}>
 											<p>{word}</p>
 
-											<span className='srOnly'>
-												Delete this word by clicking here.
-											</span>
-											<button title='remove'>{trashCan}</button>
+											<button className='removeWord' title='remove'>
+												<span className='srOnly'>
+													Delete this word by clicking here.
+												</span>
+
+												{trashCan}
+											</button>
 										</div>
 									);
 								});
@@ -267,9 +279,7 @@ class App extends Component {
 					</section>
 				</main>
 
-				<footer>
-					<Footer />
-				</footer>
+				<Footer />
 			</div>
 		);
 	}
