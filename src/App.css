@@ -22,21 +22,15 @@ li,
 button, 
 form,
 label, 
-input, 
-img {
+input {
   margin: 0;
   padding: 0;
 }
 
 a {
-  text-decoration: none;
   color: inherit;
 }
 
-img {
-  width: 100%;
-  height: auto;
-}
 
 li {
  list-style: none;
@@ -49,24 +43,6 @@ button {
   cursor: pointer;
 }
 
-/* 
-FONTS
-  HEADER FONT:
-  font-family: 'Josefin Sans', sans-serif;
-
-  PARAGRAPH FONT:
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
-
-
-COLORS:
-  red: #E76155
-  yellow: #F0B377
-  green: #CCC97
-  off-white (main background color): #fcf6f0
-  font/box shadow color: #353131
-  cream (form input background): #F9F6F4
-*/
 
 /* GLOBAL STYLES --------------------------------------------------*/
 html {
@@ -312,7 +288,7 @@ input {
   }
 }
 
-/* DISPLAYED WORDS SECTION ----------------------------------------- */
+/* DISPLAYED WORDS SECTION --------------------------------------------------------- */
 .displayedWords {
   background-color: #F0B377;
   box-shadow: 7px 7px 14px -3px #353131;
@@ -348,7 +324,8 @@ input {
 .removeWord {
   border-radius: 7px;
 }
-
+ 
+/* TODO make one class */
 .removeWord:hover,
 .removeWord:focus,
 .displayedWords button:hover,
@@ -365,7 +342,11 @@ input {
               inset -5px -5px 5px #ff9b88;
 }
 
-/* POEM LISTS ------- */
+/* POEM LISTS ------------------------------------ */
+.poemLists {
+  margin-top: 40px;
+}
+
 .poemLists ul {
   display: flex;
   flex-wrap: wrap;
@@ -376,7 +357,7 @@ input {
   width: calc(90% /3);
   height: 300px;
   overflow-y: scroll;
-  background-image: url(./assets/looseLeafBckgnd.png);
+  background-image: url('./assets/looseLeafBckgnd.png');
   background-size: cover;
   margin-bottom: 30px;
   border: 7px solid #CCCC97;
@@ -396,19 +377,52 @@ input {
   align-items: center;
 }
 
+.word {
+  padding: 5px 0;
+}
+
 /* FOOTER -------------------------------------------- */
 footer {
   background-color: #E76155;
-  padding: 30px 0;
   text-align: center;
   line-height: 32px;
-}
-
-footer a {
-  text-decoration: underline;
+  padding: 30px 0;
 }
 
 footer a:hover,
 footer a:focus {
   color: #F9F6F4;
 }
+
+/* MEDIA QUERIES --------------------------------------- */
+
+/* Portrait tablet and small desktop */
+@media(max-width: 940px){
+
+  .poemLists li {
+    width: calc(90% /2);
+  }
+
+}
+
+/* Portrait tablet, landscape phones and down */
+@media(max-width: 700px){
+  .buttonFlex {
+    flex-direction: column;
+  }
+
+  .buttonFlex button {
+    width: 100%;
+  }
+
+  .poemLists ul {
+    justify-content: center;
+  }
+
+ .poemLists li {
+    width: 90%;
+  }
+}
+
+
+

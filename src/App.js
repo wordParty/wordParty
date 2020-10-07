@@ -4,7 +4,7 @@ import axios from "axios";
 import firebase from './firebase';
 import ToggleDisplay from 'react-toggle-display';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faTimes} from '@fortawesome/free-solid-svg-icons';
 
 //IMPORTING COMPONENTS
 import Header from './Header.js';
@@ -12,7 +12,7 @@ import List from './List.js'
 import Footer from './Footer.js';
 
 //FONT AWESOME ICONS
-const trashCan = <FontAwesomeIcon icon={faTrash} />;
+// const trashCan = <FontAwesomeIcon icon={faTrash} />;
 const exit = <FontAwesomeIcon icon={faTimes} />;
 
 class App extends Component {
@@ -27,8 +27,9 @@ class App extends Component {
       savedWords: "",
       poemLibrary: [],
       showFormModal: false,
-	  showModal: false,
-	  noResultsModal: false,
+      showDisplayedWords: false,
+	    showModal: false,
+	    noResultsModal: false,
     };
   }
 
@@ -82,6 +83,7 @@ class App extends Component {
       }
       this.setState({
         words: wordsResults,
+        showDisplayedWords: true,
       });
     });
   };
@@ -101,6 +103,7 @@ class App extends Component {
       }
       this.setState({
         words: wordsResults,
+        showDisplayedWords: true,
       });
     });
   };
@@ -274,20 +277,25 @@ class App extends Component {
             </div>
           </section>
 
-          <section className="displayedWords">
-            <h2>{this.state.title}</h2>
-            <ul>
-              {this.state.words.map((singleWord) => {
-                return (
-                  <li key={singleWord.score} className="wordContainer">
-                    <button value={singleWord.word} onClick={this.toggleModal}>
-                      {singleWord.word}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
+         <ToggleDisplay show={this.state.showDisplayedWords}>
+						<section className='displayedWords'>
+							<h2>{this.state.title}</h2>
+							<ul>
+								{this.state.words.map((singleWord) => {
+									return (
+										<li key={singleWord.score} className='wordContainer'>
+											<button
+												value={singleWord.word}
+												onClick={this.toggleModal}
+											>
+												{singleWord.word}
+											</button>
+										</li>
+									);
+								})}
+							</ul>
+						</section>
+					</ToggleDisplay>
 
           <section className="poemLists">
             <ul>
@@ -299,13 +307,13 @@ class App extends Component {
                     <div className="words" key={index}>
                       <p>{word}</p>
 
-                      <button className="removeWord" title="remove">
-                        <span className="srOnly">
-                          Delete this word by clicking here.
-                        </span>
+//                       <button className="removeWord" title="remove">
+//                         <span className="srOnly">
+//                           Delete this word by clicking here.
+//                         </span>
 
-                        {trashCan}
-                      </button>
+//                         {trashCan}
+//                       </button>
                     </div>
                   );
                 });
