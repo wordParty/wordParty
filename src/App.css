@@ -144,9 +144,7 @@ button {
 button {
   color: #353131;
   background-color: #CCCC97;
-
   font-size: 2rem;
-
   padding: 10px;
   margin: 10px;
 }
@@ -159,7 +157,7 @@ input {
 
 .wrapper {
   width: 80%;
-  max-width: 1280;
+  max-width: 1280px;
   margin: auto;
 }
 
@@ -187,10 +185,8 @@ main {
 .form {
   background-color: #E76155;
   box-shadow: 7px 7px 14px -3px #353131;
-
   border-radius: 10px;
   padding: 40px 30px;
-
   display: flex;
   flex-direction: column;
 }
@@ -213,7 +209,6 @@ input {
 .form button {
   box-shadow: 5px 5px 10px -3px #353131;
   letter-spacing: 2px;
-
   border-radius: 10px;
   width: 40%;
   padding: 20px;
@@ -251,11 +246,9 @@ input {
 
 .modal {
   background-color: #30303090;
-
   width: 100%;
   height: 100%; 
   padding-top: 150px;
-
   position: fixed; 
   left: 0; 
   top: 0;
@@ -265,27 +258,22 @@ input {
 
 .modalContent {
   background-color: #F9F6F4;
-
   border-radius: 10px;
   padding: 20px; 
   margin: auto; 
   width: 50%;  
   height: 30%;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   position: relative; 
-
   animation-name: animatetop;
   animation-duration: 0.4s
 }
 
 .modalContent h3 {
   letter-spacing: 3px;
-
   padding: 20px 0 10px;
 }
 
@@ -293,19 +281,21 @@ input {
   text-align: center;
 }
 
-.closeModal {
+.closeModal,
+.removeList {
   background-color: #E76155;
-
   border-radius: 50%;
   width: 45px;
-  
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -5px;
+  left: -5px;
 }
 
+
 .closeModal:hover,
-.closeModal:focus {
+.closeModal:focus,
+.removeList:hover,
+.removeList:focus{
   transition: all .4s;
   background-color: #F0B377;
 }
@@ -321,7 +311,8 @@ input {
     opacity: 1;
   }
 }
-/* DISPLAYED WORDS SECTION ---------- */
+
+/* DISPLAYED WORDS SECTION ----------------------------------------- */
 .displayedWords {
   background-color: #F0B377;
   box-shadow: 7px 7px 14px -3px #353131;
@@ -349,41 +340,36 @@ input {
 .displayedWords button {
   box-shadow: 5px 5px 10px -3px #353131;
   letter-spacing: 2px;
-  border-radius: 7px;
   width: 100%;
   padding: 15px 10px;
 }
 
+.displayedWords button,
+.removeWord {
+  border-radius: 7px;
+}
+
+.removeWord:hover,
+.removeWord:focus,
 .displayedWords button:hover,
-.poemLists button:hover{
+.displayedWords button:focus {
   background-color: #E76155;
   letter-spacing: 3px;
   transition: all .4s;
 }
 
-.displayedWords button:active,
-.poemLists button:active{
+.displayedWords button:active {
   border-radius: 7px;
   background: #E76155;
   box-shadow: inset 5px 5px 5px #5c2722, 
-            inset -5px -5px 5px #ff9b88;
+              inset -5px -5px 5px #ff9b88;
 }
 
 /* POEM LISTS ------- */
-.poemLists button {
-  border-radius: 7px;
-}
-
-.removeList {
-  margin-top: 0;
-  margin-left: 0;
-}
-
 .poemLists ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  
+  justify-content: space-between; 
 }
 
 .poemLists li {
@@ -396,28 +382,33 @@ input {
   border: 7px solid #CCCC97;
   border-radius: 7px;
   padding: 10px;
+  position: relative;
+}
+
+.poemLists li h3 {
+  padding-left: 55px;
 }
 
 .words {
+  padding-left: 55px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
 }
 
-/* FOOTER ------- */
-.footer {
+/* FOOTER -------------------------------------------- */
+footer {
   background-color: #E76155;
   padding: 30px 0;
   text-align: center;
   line-height: 32px;
 }
 
-.footer a {
+footer a {
   text-decoration: underline;
 }
 
-.footer a:hover {
+footer a:hover,
+footer a:focus {
   color: #F9F6F4;
-
 }
