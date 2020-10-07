@@ -95,11 +95,11 @@ h1 {
 }
 
 h2 {
-  font-size: clamp(4rem, 5vw, 6rem);
+  font-size: clamp(3rem, 5vw, 6rem);
 }
 
 h3 {
-  font-size: clamp(3rem, 3vw, 4rem);
+  font-size: clamp(1.8rem, 3vw, 4rem);
 }
 
 p, 
@@ -309,7 +309,7 @@ input {
 }
 
 .displayedWords li {
-  width: calc(90% / 4);
+  width: calc(90% / 2);
   margin: 20px 0;
 }
 
@@ -398,12 +398,9 @@ footer a:focus {
 
 /* Portrait tablet and small desktop */
 @media(max-width: 940px){
-  .displayedWords button {
-    width: 50%;
-  }
-
- .poemLists li {
-    width: calc(90% /2);
+  .displayedWords li,
+  .poemLists li {
+    width: calc(90% / 2);
   }
 
 }
@@ -422,10 +419,15 @@ footer a:focus {
     justify-content: center;
   }
 
- .poemLists li {
+  .displayedWords li,
+  .poemLists li {
     width: 90%;
+    margin: 10px 0;
+  }
+
+  .removeList {
+    width: 35px;
+    height: 35px;
+    font-size: 1.4rem;
   }
 }
-
-
-
