@@ -71,11 +71,38 @@ COLORS:
 /* GLOBAL STYLES --------------------------------------------------*/
 html {
   font-size: 62.5%;
+
+  /* Firefox main scroll bar */
+  scrollbar-color: #CCCC97 white;
+  scrollbar-width: 12px;
+}
+
+/* Chrome/Edge/Safari main scroll bar  */
+html *::-webkit-scrollbar {
+  width: 12px;
+}
+
+html *::-webkit-scrollbar-track {
+  background: white;
+}
+    
+html *::-webkit-scrollbar-thumb {
+  background-color: #CCCC97;
+  border-radius: 20px;
+  border: 3px solid white;
 }
 
 body {
   color: #353131;
   background-color: #fcf6f0;
+
+  /* Firefox body/list scroll bar */
+  scrollbar-color: #f0b377 white;
+}
+
+/* Chrome/Edge/Safari body/list scroll bar  */
+body *::-webkit-scrollbar-thumb {
+  background-color: #F0B377;
 }
 
 h1, 
@@ -345,6 +372,37 @@ input {
 /* POEM LISTS ------- */
 .poemLists button {
   border-radius: 7px;
+}
+
+.removeList {
+  margin-top: 0;
+  margin-left: 0;
+}
+
+.poemLists ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  
+}
+
+.poemLists li {
+  width: calc(90% /3);
+  height: 300px;
+  overflow-y: scroll;
+  background-image: url(./assets/looseLeafBckgnd.png);
+  background-size: cover;
+  margin-bottom: 30px;
+  border: 7px solid #CCCC97;
+  border-radius: 7px;
+  padding: 10px;
+}
+
+.words {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
 }
 
 /* FOOTER ------- */

@@ -12,12 +12,13 @@ class List extends React.Component {
         }
     render() {
         return (
+            
             <li key={this.props.listKey}>
-                <button title='remove' onClick={this.callRemove}>
+                <button className="removeList" title='remove' onClick={this.callRemove}>
                 <span className='srOnly'>
-                    Delete this list by clicking here.
+                        Delete this list by clicking here.
 				        </span>{exit}</button>
-          
+                
                 <h3>{this.props.title}</h3>
 
                 
