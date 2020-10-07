@@ -72,6 +72,7 @@ class App extends Component {
 				rel_rhy: this.state.rhymeInput,
 			},
 		}).then((response) => {
+
 			let wordsResults = response.data;
 			this.setState({
 				words: wordsResults,
@@ -121,7 +122,6 @@ class App extends Component {
 	};
 
 	// onClick Handle to get list of synonymns and to place these words in state
-
 	handleSyn = () => {
 		this.setState(
 			{
@@ -145,13 +145,23 @@ class App extends Component {
 	};
 
 	toggleModal = (event) => {
-		if (this.state.poemLibrary.length > 0) {
-			const checkWords = this.state.poemLibrary[0].listOfWords.includes(
-				event.target.value
-			);
-			console.log(checkWords);
 
-			checkWords ? this.displayModal() : this.addToList(event.target.value);
+		if (this.state.poemLibrary.length > 0) {
+		
+			const listIndex = this.state.poemLibrary.map((list)=> list.key).indexOf(this.state.title);
+		
+			if (listIndex > -1){
+				const checkWords = this.state.poemLibrary[listIndex].listOfWords.includes(event.target.value);
+			
+				if (checkWords) {
+					this.displayModal(); 
+				} else {
+					this.addToList(event.target.value);
+				}
+			} else {
+				this.addToList(event.target.value);
+			}
+
 		} else {
 			this.addToList(event.target.value);
 		}
@@ -166,6 +176,7 @@ class App extends Component {
 		});
 	};
 
+
 	displayModal = () => {
 		this.setState({
 			showModal: !this.state.showModal,
@@ -175,11 +186,10 @@ class App extends Component {
 	render() {
 		return (
 			<div className='App'>
+
 				<Header />
 
-
 				<main className='wrapper'>
-
 					{/* error handling modal if user tries to add same word to a list twice */}
 					<ToggleDisplay show={this.state.showModal}>
 						<div className='modal'>
