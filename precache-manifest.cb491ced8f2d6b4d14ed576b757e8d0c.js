@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "053f922a8485f4808c2c47d61b3b3379",
+    "revision": "5c9150d3311f5090e15ff8ec523e79dd",
     "url": "/wordParty/index.html"
   },
   {
-    "revision": "0787eb5c8caf9d247445",
-    "url": "/wordParty/static/css/main.fa98d0af.chunk.css"
+    "revision": "ec89aa9d77a7813f1bc3",
+    "url": "/wordParty/static/css/main.f46df3e3.chunk.css"
   },
   {
-    "revision": "1e0ab5c3a80c054e2c80",
-    "url": "/wordParty/static/js/2.69c88300.chunk.js"
+    "revision": "119bfb836a87a09a953f",
+    "url": "/wordParty/static/js/2.35a70982.chunk.js"
   },
   {
     "revision": "16056f19fc2a7e8fef3e22f99eb947d7",
-    "url": "/wordParty/static/js/2.69c88300.chunk.js.LICENSE.txt"
+    "url": "/wordParty/static/js/2.35a70982.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "0787eb5c8caf9d247445",
-    "url": "/wordParty/static/js/main.c9227385.chunk.js"
+    "revision": "ec89aa9d77a7813f1bc3",
+    "url": "/wordParty/static/js/main.999a8f2f.chunk.js"
   },
   {
     "revision": "cccdb568bd443e2cf2ef",
