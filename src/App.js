@@ -289,7 +289,7 @@ class App extends Component {
 								const wordList = myObject.map((word, index) => {
 									return (
 										<div className='words' key={index}>
-											<p>{word}</p>
+											<p className='word'>{word}</p>
 										</div>
 									);
 								});
