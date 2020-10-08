@@ -31,7 +31,6 @@ a {
   color: inherit;
 }
 
-
 li {
  list-style: none;
 }
@@ -137,8 +136,8 @@ input {
   margin: auto;
 }
 
-/* HEADER STYLES ------------------------------------------------- */
 
+/* HEADER STYLES ------------------------------------------------- */
 header {
   background-color: #F0B377;
 
@@ -152,8 +151,8 @@ header {
   align-items: center;
 }
 
-/* FORM STYLES ------------------------------------- */
 
+/* FORM STYLES ------------------------------------- */
 main {
   padding: 60px 0;
 }
@@ -217,8 +216,8 @@ input {
   align-items: center;
 }
 
-/* MODAL STYLES ----------------------------------------------------- */
 
+/* MODAL STYLES ----------------------------------------------------- */
 .modal {
   background-color: #30303090;
   width: 100%;
@@ -266,7 +265,6 @@ input {
   left: -5px;
 }
 
-
 .closeModal:hover,
 .closeModal:focus,
 .removeList:hover,
@@ -286,6 +284,7 @@ input {
     opacity: 1;
   }
 }
+
 
 /* DISPLAYED WORDS SECTION --------------------------------------------------------- */
 .displayedWords {
@@ -340,6 +339,7 @@ input {
               inset -5px -5px 5px #ff9b88;
 }
 
+
 /* POEM LISTS ------------------------------------ */
 .poemLists {
   margin-top: 40px;
@@ -379,6 +379,7 @@ input {
   padding: 5px 0;
 }
 
+
 /* FOOTER -------------------------------------------- */
 footer {
   background-color: #E76155;
@@ -392,8 +393,8 @@ footer a:focus {
   color: #F9F6F4;
 }
 
-/* MEDIA QUERIES --------------------------------------- */
 
+/* MEDIA QUERIES --------------------------------------- */
 /* Portrait tablet and small desktop */
 @media(max-width: 940px){
 

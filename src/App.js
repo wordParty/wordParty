@@ -3,19 +3,14 @@ import './App.css';
 import axios from 'axios';
 import firebase from './firebase';
 import ToggleDisplay from 'react-toggle-display';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faTimes} from '@fortawesome/free-solid-svg-icons';
 
-//IMPORTING COMPONENTS
+// IMPORTING COMPONENTS
 import Header from './Header.js';
 import Modal from './Modal.js';
 import List from './List.js'
 import Footer from './Footer.js';
 
-//FONT AWESOME ICONS
-const exit = <FontAwesomeIcon icon={faTimes} />;
-
-// App State
+// App States by default
 class App extends Component {
   constructor() {
     super();
@@ -61,6 +56,7 @@ class App extends Component {
       this.setState({
         poemLibrary: newState,
       });
+
     });
   }
 
@@ -170,18 +166,20 @@ class App extends Component {
       if (listIndex > -1) {
         const checkWords = this.state.poemLibrary[listIndex].listOfWords.includes(event.target.value);
 
-        // If there's a matching word in listOfWords, it will display modal
+        // If there's a matching word in listOfWords, it call the function that displays modal
         if (checkWords) {
           this.displayModal();
 
-        //If false, it will add to list
+        // If false, it will add word to list
         } else {
           this.addToList(event.target.value);
         }
+
       } else {
         this.addToList(event.target.value);
       }
-    // If saved list doesn't exist, add to the list
+
+    // If list doesn't exist in Firebase, add it
     } else { 
       this.addToList(event.target.value);
     }
@@ -204,7 +202,7 @@ class App extends Component {
     });
   }
 
-  //Removing list from Firebase when button is clicked
+  // Removing list from Firebase when button is clicked
   handleRemove = (listKey) => {
     const dbRef = firebase.database().ref();
     dbRef.child(listKey).remove();
@@ -213,6 +211,7 @@ class App extends Component {
   render() {
     return (
 			<div className='App'>
+        
 				<Header />
 
 				<main className='wrapper'>
@@ -308,6 +307,7 @@ class App extends Component {
 				</main>
 
 				<Footer />
+
 			</div>
 		);
   }

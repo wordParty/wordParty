@@ -1,10 +1,13 @@
 import React from 'react';
+
+// FONT AWESOME ICON
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const exit = <FontAwesomeIcon icon={faTimes} />;
 
 class Modal extends React.Component {
-    // Call the function that will 
+
+	// callModal function is passing a prop that call the modal in the App.js component
 	callModal = () => {
 		this.props.showTheModal();
 	};

@@ -1,13 +1,14 @@
 import React from 'react';
+
+// FONT AWESOME ICON
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-
 const exit = <FontAwesomeIcon icon={faTimes} />;
 
 
 class List extends React.Component {
-    // callRemove function is passing a prop that removes the list via removeHandle on App.js
 
+    // callRemove function is passing a prop that removes the list via removeHandle in the App.js component
     callRemove = () => {
         this.props.removeHandle(this.props.title)
     }
