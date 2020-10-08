@@ -215,29 +215,6 @@ class App extends Component {
 				<Header />
 
 				<main className='wrapper'>
-					{/* error handling modal if input is blank when submitted */}
-					<ToggleDisplay show={this.state.showFormModal}>
-						<Modal
-							pTag='Please enter a word and try again!'
-							showTheModal={this.displayFormModal}
-						/>
-					</ToggleDisplay>
-
-					{/* error handling modal if API call returns no results */}
-					<ToggleDisplay show={this.state.noResultsModal}>
-						<Modal
-							pTag="Looks like we can't find any results, please try another word!"
-							showTheModal={this.displayNoResultsModal}
-						/>
-					</ToggleDisplay>
-
-					{/* error handling modal if user tries to add same word to a list twice */}
-					<ToggleDisplay show={this.state.showModal}>
-						<Modal
-							pTag='Looks like this word has already been added to your list!'
-							showTheModal={this.displayModal}
-						/>
-					</ToggleDisplay>
 
 					{/*section that takes in user input*/}
 					<section className='form'>
@@ -258,6 +235,30 @@ class App extends Component {
 						</div>
 					</section>
 
+          {/* error handling modal if input is blank when submitted */}
+          <ToggleDisplay show={this.state.showFormModal}>
+            <Modal
+              pTag='Please enter a word and try again!'
+              showTheModal={this.displayFormModal}
+            />
+          </ToggleDisplay>
+
+          {/* error handling modal if API call returns no results */}
+          <ToggleDisplay show={this.state.noResultsModal}>
+            <Modal
+              pTag="Looks like we can't find any results, please try another word!"
+              showTheModal={this.displayNoResultsModal}
+            />
+          </ToggleDisplay>
+
+          {/* error handling modal if user tries to add same word to a list twice */}
+          <ToggleDisplay show={this.state.showModal}>
+            <Modal
+              pTag='Looks like this word has already been added to your list!'
+              showTheModal={this.displayModal}
+            />
+          </ToggleDisplay>
+
 					{/*section where API call results are displayed*/}
 					<ToggleDisplay show={this.state.showDisplayedWords}>
 						<section className='displayedWords'>
@@ -265,7 +266,7 @@ class App extends Component {
 							<ul>
 								{this.state.words.map((singleWord) => {
 									return (
-										<li key={singleWord.score} className='wordContainer'>
+										<li key={singleWord.score}>
 											<button
 												value={singleWord.word}
 												onClick={this.toggleModal}
