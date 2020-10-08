@@ -68,7 +68,7 @@ html *::-webkit-scrollbar-thumb {
 }
 
 body {
-  color: #353131;
+  color: #272525;
   background-color: #fcf6f0;
 
   /* Firefox body/list scroll bar */
@@ -117,7 +117,7 @@ button {
 }
 
 button {
-  color: #353131;
+  color: #272525;
   background-color: #CCCC97;
   font-size: 2rem;
   padding: 10px;
@@ -125,7 +125,7 @@ button {
 }
 
 input {
-  color: #353131;
+  color: #272525;
   background-color: #F9F6F4;
   font-size: clamp(1.6rem, 2vw, 2.2rem);
 }
@@ -159,7 +159,7 @@ main {
 
 .form {
   background-color: #E76155;
-  box-shadow: 7px 7px 14px -3px #353131;
+  box-shadow: 7px 7px 14px -3px #272525;
   border-radius: 10px;
   padding: 40px 30px;
   display: flex;
@@ -182,7 +182,7 @@ input {
 }
 
 .form button {
-  box-shadow: 5px 5px 10px -3px #353131;
+  box-shadow: 5px 5px 10px -3px #272525;
   letter-spacing: 2px;
   border-radius: 10px;
   width: 40%;
@@ -289,7 +289,7 @@ input {
 /* DISPLAYED WORDS SECTION --------------------------------------------------------- */
 .displayedWords {
   background-color: #F0B377;
-  box-shadow: 7px 7px 14px -3px #353131;
+  box-shadow: 7px 7px 14px -3px #272525;
   border-radius: 10px;
   padding: 40px 30px;
   margin: 60px 0;
@@ -312,7 +312,7 @@ input {
 }
 
 .displayedWords button {
-  box-shadow: 5px 5px 10px -3px #353131;
+  box-shadow: 5px 5px 10px -3px #272525;
   letter-spacing: 2px;
   width: 100%;
   padding: 15px 10px;

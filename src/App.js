@@ -241,7 +241,8 @@ class App extends Component {
 
 					{/*section that takes in user input*/}
 					<section className='form'>
-						<label htmlFor='chosenWord'>Enter A Word</label>
+            <h2>Enter A Word</h2>
+						<label className='srOnly' htmlFor='chosenWord'>Enter A Word</label>
 						<input
 							type='text'
 							id='chosenWord'
