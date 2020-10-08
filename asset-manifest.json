@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/wordParty/static/css/main.f46df3e3.chunk.css",
+    "main.css": "/wordParty/static/css/main.1b9d38da.chunk.css",
     "main.js": "/wordParty/static/js/main.999a8f2f.chunk.js",
     "main.js.map": "/wordParty/static/js/main.999a8f2f.chunk.js.map",
     "runtime-main.js": "/wordParty/static/js/runtime-main.a811ee6d.js",
@@ -8,16 +8,16 @@
     "static/js/2.35a70982.chunk.js": "/wordParty/static/js/2.35a70982.chunk.js",
     "static/js/2.35a70982.chunk.js.map": "/wordParty/static/js/2.35a70982.chunk.js.map",
     "index.html": "/wordParty/index.html",
-    "precache-manifest.cb491ced8f2d6b4d14ed576b757e8d0c.js": "/wordParty/precache-manifest.cb491ced8f2d6b4d14ed576b757e8d0c.js",
+    "precache-manifest.f08e434461437e34e5cfe7e89208aed8.js": "/wordParty/precache-manifest.f08e434461437e34e5cfe7e89208aed8.js",
     "service-worker.js": "/wordParty/service-worker.js",
-    "static/css/main.f46df3e3.chunk.css.map": "/wordParty/static/css/main.f46df3e3.chunk.css.map",
+    "static/css/main.1b9d38da.chunk.css.map": "/wordParty/static/css/main.1b9d38da.chunk.css.map",
     "static/js/2.35a70982.chunk.js.LICENSE.txt": "/wordParty/static/js/2.35a70982.chunk.js.LICENSE.txt",
     "static/media/App.css": "/wordParty/static/media/looseLeafBckgnd.a16074b5.png"
   },
   "entrypoints": [
     "static/js/runtime-main.a811ee6d.js",
     "static/js/2.35a70982.chunk.js",
-    "static/css/main.f46df3e3.chunk.css",
+    "static/css/main.1b9d38da.chunk.css",
     "static/js/main.999a8f2f.chunk.js"
   ]
 }
