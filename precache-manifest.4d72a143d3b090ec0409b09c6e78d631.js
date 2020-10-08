@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f550b87fd838ddede71b8feca75a8e0d",
+    "revision": "addb08586a785b26365ac4493d53084a",
     "url": "/wordParty/index.html"
   },
   {
-    "revision": "10cd34ec1f2926ef1468",
+    "revision": "e9586cd6fcac8fa2caae",
     "url": "/wordParty/static/css/main.97ba3e21.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/wordParty/static/js/2.35a70982.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "10cd34ec1f2926ef1468",
-    "url": "/wordParty/static/js/main.e207e3d3.chunk.js"
+    "revision": "e9586cd6fcac8fa2caae",
+    "url": "/wordParty/static/js/main.7cf3bc4f.chunk.js"
   },
   {
     "revision": "cccdb568bd443e2cf2ef",
