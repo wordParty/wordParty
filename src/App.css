@@ -307,7 +307,7 @@ input {
 }
 
 .displayedWords li {
-  width: calc(90% / 2);
+  width: calc(90% / 4);
   margin: 20px 0;
 }
 
