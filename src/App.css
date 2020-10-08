@@ -166,8 +166,7 @@ main {
   flex-direction: column;
 }
 
-.form h2,
-label {
+.form h2 {
   font-size: clamp(2rem, 3vw, 3.2rem);
 }
 
@@ -177,7 +176,7 @@ input {
   margin: 10px 0;
 }
 
-.form h2 {
+.question {
   padding: 50px 0 5px;
 }
 

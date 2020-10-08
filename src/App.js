@@ -227,7 +227,7 @@ class App extends Component {
 							value={this.state.wordInput}
 							placeholder='Ex: Happy'
 						/>
-						<h2>What kind of words would you like?</h2>
+						<h2 className='question'>What kind of words would you like?</h2>
 						<div className='buttonFlex'>
 							<button onClick={() => this.handleSyn()}>Synonyms</button>
 							<p>or</p>
