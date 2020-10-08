@@ -412,9 +412,13 @@ footer a:focus {
 /* Portrait tablet, landscape phones and down */
 @media(max-width: 700px){
 
+  header {
+    height: 60vh;
+  }
+
   .modalContent {
-    width: 80%;
-    height: 40%;
+    width: 90%;
+    height: 50%;
   }
 
   .buttonFlex {
