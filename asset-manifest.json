@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/word-party/static/css/main.892350cd.chunk.css",
-    "main.js": "/word-party/static/js/main.20a80b38.chunk.js",
-    "main.js.map": "/word-party/static/js/main.20a80b38.chunk.js.map",
-    "runtime-main.js": "/word-party/static/js/runtime-main.6fbf841f.js",
-    "runtime-main.js.map": "/word-party/static/js/runtime-main.6fbf841f.js.map",
-    "static/js/2.0e03b05a.chunk.js": "/word-party/static/js/2.0e03b05a.chunk.js",
-    "static/js/2.0e03b05a.chunk.js.map": "/word-party/static/js/2.0e03b05a.chunk.js.map",
-    "index.html": "/word-party/index.html",
-    "precache-manifest.b9fe5abf9c32c28d31ff991c7a6db01a.js": "/word-party/precache-manifest.b9fe5abf9c32c28d31ff991c7a6db01a.js",
-    "service-worker.js": "/word-party/service-worker.js",
-    "static/css/main.892350cd.chunk.css.map": "/word-party/static/css/main.892350cd.chunk.css.map",
-    "static/js/2.0e03b05a.chunk.js.LICENSE.txt": "/word-party/static/js/2.0e03b05a.chunk.js.LICENSE.txt",
-    "static/media/App.css": "/word-party/static/media/looseLeafBckgnd.a16074b5.png"
+    "main.css": "/wordParty/static/css/main.8a145800.chunk.css",
+    "main.js": "/wordParty/static/js/main.39ee39b4.chunk.js",
+    "main.js.map": "/wordParty/static/js/main.39ee39b4.chunk.js.map",
+    "runtime-main.js": "/wordParty/static/js/runtime-main.a811ee6d.js",
+    "runtime-main.js.map": "/wordParty/static/js/runtime-main.a811ee6d.js.map",
+    "static/js/2.35a70982.chunk.js": "/wordParty/static/js/2.35a70982.chunk.js",
+    "static/js/2.35a70982.chunk.js.map": "/wordParty/static/js/2.35a70982.chunk.js.map",
+    "index.html": "/wordParty/index.html",
+    "precache-manifest.80fbd121a810c51718bcffef8f72720c.js": "/wordParty/precache-manifest.80fbd121a810c51718bcffef8f72720c.js",
+    "service-worker.js": "/wordParty/service-worker.js",
+    "static/css/main.8a145800.chunk.css.map": "/wordParty/static/css/main.8a145800.chunk.css.map",
+    "static/js/2.35a70982.chunk.js.LICENSE.txt": "/wordParty/static/js/2.35a70982.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/wordParty/static/media/looseLeafBckgnd.a16074b5.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.6fbf841f.js",
-    "static/js/2.0e03b05a.chunk.js",
-    "static/css/main.892350cd.chunk.css",
-    "static/js/main.20a80b38.chunk.js"
+    "static/js/runtime-main.a811ee6d.js",
+    "static/js/2.35a70982.chunk.js",
+    "static/css/main.8a145800.chunk.css",
+    "static/js/main.39ee39b4.chunk.js"
   ]
 }
